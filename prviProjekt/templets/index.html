@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<h1>My First templet</h1>
-<p>Hello</p>
-
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Main</title>
+	<head>
+	<body>
+		<h1>Nvm kaj delam</h1>
+		{% if podatki['uspeh'] %}
+		<i>Uspešno sem se povezal na database.</i>
+		{% else %}
+		<i><b>Neuspešno</b> sem se povezal na database.</i>
+		{% endif %}
+	</body>
 </html>
