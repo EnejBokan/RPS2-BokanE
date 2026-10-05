@@ -30,6 +30,7 @@ def index ():
         data["visina"] = request.form.get("visina")
         if data["teza"] and data["visina"]:
             data["itm"] = izracunItm (float(data["visina"]), float(data["teza"]))
+            dbLogic.insertData(float(data["visina"]), float(data["teza"]), data ["itm"])
         
         print(data)
         
