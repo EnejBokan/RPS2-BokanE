@@ -45,5 +45,13 @@ def izracunItm (visinaCM, tezaKG):
 #def hello_world():
 #    return "Hello 2.Ri!"
 
+@app.route("/dnevnik", methods = ["GET", "POST"])
+def dnevnik ():
+    data = {}
+    
+    data["seznam"] = dbLogic.getAll()
+    return render_template("dnevnik.html", podatki = data)
+
+# zagon aplikacije
 app.config["DEBUG"] = True
 app.run(host = appAdress, port = appPort)
