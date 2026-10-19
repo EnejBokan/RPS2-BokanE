@@ -26,17 +26,24 @@ def index ():
     }
     data["uspeh"] = dbLogic.getAll()
     if request.method == "POST":
-        data["teza"] = request.form.get("teza")
-        data["visina"] = request.form.get("visina")
+        data["teza"] = request.form.get("teza") #Pridobi težo ki jo je vnesel uporabnik
+        data["visina"] = request.form.get("visina") #Pridobi višino, ki jo je vnosil uporabnik 
         if data["teza"] and data["visina"]:
-            data["itm"] = izracunItm (float(data["visina"]), float(data["teza"]))
-            dbLogic.insertData(float(data["visina"]), float(data["teza"]), data ["itm"])
+            print("***********DEBUG***********") #ZA iskanje problemov
+            data["itm"] = round(izracunItm (float(data["visina"]), float(data["teza"])), 2) #izračun ITM zaokroži na 2 decimalki
+            dbLogic.insertData(float(data["visina"]), float(data["teza"]), data ["itm"]) # prenese podatke v dbLogic 
         
-        print(data)
+    print("*********DEBUG*********") #Za iskanje problemov 
         
-    return render_template("index.html", podatki = data)
+    return render_template("index.html", podatki = data) # spremenjivka podatki v index.html je ista kot spremenljivka data v run.py 
+    
+@app.route("/izbrisi/<sID>")
+def dnevnikIzbrisi(sID):
+    ID = int(sID)
+    dbLogic.deleteItm(ID)
+    return redirect("/dnevnik")
 
-def izracunItm (visinaCM, tezaKG):
+def izracunItm (visinaCM, tezaKG): #Izračuna ITM 
     itm = tezaKG / (visinaCM/100)**2
     return itm
 

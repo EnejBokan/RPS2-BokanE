@@ -20,18 +20,19 @@ def getAll ():
     except:
         return []
     finally:
-        cursor.close()
-        mydb.close()
+        # cursor.close()
+        # mydb.close()
+        pass
 
 def insertData (visina, teza, itm):
     
     sql ="""
     INSERT INTO dnevnik (datumCas, visina, teza, itm)
-    VALUES0(NOW(), {}, {}, {});
+    VALUES (NOW(), {}, {}, {});
     """.format(visina, teza, itm)
-    
+    print("****************DEBUG**************")
     try:
-        mydb =dbconfig.dbConnect()
+        mydb =dbConfig.dbConnect()
         cursor = mydb.cursor()
         cursor.execute(sql)
         mydb.commit()
