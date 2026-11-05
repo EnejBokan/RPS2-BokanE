@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import redirect
 
 #Moje knjižnice
 from module import dbConfig
@@ -10,11 +11,12 @@ from module import dbLogic
 
 app = Flask(__name__)
 
-appAdress = "0.0.0.0"
-appPort = 5000
+appAdress = "127.0.0.1"
+appPort = 80
 
+dnevnikURL = "http://" + str(appAdress) + ":" + str(appPort) + "/dnevnik"
 
-
+# Glavno usmerjevanje aplikacije
 
 @app.route("/", methods = ["GET", "POST"])
 def index ():
@@ -42,19 +44,18 @@ def dnevnikIzbrisi(sID):
     ID = int(sID)
     dbLogic.deleteItm(ID)
     return redirect("/dnevnik")
+    return redirect(dnevnikURL)
 
 def izracunItm (visinaCM, tezaKG): #Izračuna ITM 
     itm = tezaKG / (visinaCM/100)**2
     return itm
 
 
-#@app.route("/")
-#def hello_world():
-#    return "Hello 2.Ri!"
-
 @app.route("/dnevnik", methods = ["GET", "POST"])
 def dnevnik ():
-    data = {}
+    data = {
+        "seznam" : []
+    }
     
     data["seznam"] = dbLogic.getAll()
     return render_template("dnevnik.html", podatki = data)

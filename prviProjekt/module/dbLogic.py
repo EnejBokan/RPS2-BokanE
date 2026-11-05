@@ -32,14 +32,34 @@ def insertData (visina, teza, itm):
     """.format(visina, teza, itm)
     print("****************DEBUG**************")
     try:
-        mydb =dbConfig.dbConnect()
+        mydb = dbConfig.dbConnect()
         cursor = mydb.cursor()
         cursor.execute(sql)
         mydb.commit()
         vrniID = cursor.lastrowid
         return vrniID
     except:
-        return -1
+        mydb.rollback
+        return vrniID
+    finally:
+        cursor.close()
+        mydb.close()
+
+#Brisanje vnosov v dnevniku
+def brisanjeITM (id):
+    sql = """
+    DELETE FROM dnevnik 
+        WHERE ID = {};
+    """.format(id)
+    try:
+        mydb = dbConfig.dbConnect()
+        cursor = mydb.cursor()
+        cursor.execute(sql)
+        mydb.commit()
+        return True
+    except:
+        mydb.rollback()
+        return False
     finally:
         cursor.close()
         mydb.close()
