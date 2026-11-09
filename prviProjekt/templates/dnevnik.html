@@ -7,7 +7,7 @@
 		<body>
 
 		<h1>Dnevnik dogodkov</h1>
-		<table>
+		<table border ="1">
 			<tr>
 				<th>ID</th>
 					<th>Datum in čas</th>
@@ -19,14 +19,17 @@
 				{% for obj in podatki['seznam'] %}
 				<tr>
 					<td>{{obj.ID}}</td>
-					<td>{{obj.DatumCas}}</td>
-					<td>{{obj.Visina}}</td>
-					<td>{{obj.Teza}}</td>
-					<td>{{obj.Itm}}</td>
-					<td><a href = "/izbrisi/{{obj.ID}}">Izbrisi</a></td>
+					<td>{{obj.datumCas}}</td>
+					<td>{{obj.visina}}</td>
+					<td>{{obj.teza}}</td>
+					<td>{{obj.itm}}</td>
+					<td><a href = "/izbrisi/{{obj.ID}}">Izbrisi</a>|<a href = "/arhiviraj/{{obj.ID}}">Arhiviraj</a></td>
 				</tr>
 				{% endfor %}
 			</table>
+			
+			
+<br><a href="/">Kalkulator</a>
 
 
 

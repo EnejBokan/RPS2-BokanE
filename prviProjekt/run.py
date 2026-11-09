@@ -42,8 +42,14 @@ def index ():
 @app.route("/izbrisi/<sID>")
 def dnevnikIzbrisi(sID):
     ID = int(sID)
-    dbLogic.deleteItm(ID)
+    dbLogic.brisanjeITM(ID)
     return redirect("/dnevnik")
+    return redirect(dnevnikURL)
+    
+@app.route("/arhiviraj/<sID>")
+def dnevnik_arhiviraj(sID):
+    ID = int(sID)
+    dbLogic.softDeleteItm(ID)
     return redirect(dnevnikURL)
 
 def izracunItm (visinaCM, tezaKG): #Izračuna ITM 

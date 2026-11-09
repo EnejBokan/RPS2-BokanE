@@ -5,11 +5,11 @@
 		<title>Main</title>
 	<head>
 	<body>
-		<h1>Nvm kaj delam</h1>
+		<h1>Vnos ITM</h1>
 		{% if podatki['uspeh'] %}
-		<i>Uspešno sem se povezal na database.</i>
+			<i><b>Uspešno</b> sem se povezal na database.</i>
 		{% else %}
-		<i><b>Neuspešno</b> sem se povezal na database.</i>
+			<i><b>Neuspešno</b> sem se povezal na database.</i>
 		{% endif %}
 		
 		<form action="/" method = "POST">
@@ -22,5 +22,7 @@
 		{% if podatki['itm'] %}
 		<i>Vaš itm je {{podatki['itm']}}</i>
 		{% endif %}
+		
+		<br><a href="/dnevnik">Dnevnik</a>
 	</body>
 </html>
